@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Auto Video Loader</title>
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="css/style.css"> -->
@@ -30,14 +29,20 @@
       <div class="item"><iframe width="100%" height="350" src="https://www.youtube.com/embed/T5iGAAypGBA?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
     </div>
 
+    <div class="nextBtn">Next</div>
+
+
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script>
+
+      var owl = $('.owl-carousel');
        
-      $('.owl-carousel').owlCarousel({
+      owl.owlCarousel({
         items:1,
         merge:true,
         loop:true,
@@ -45,10 +50,11 @@
         video:true,
         lazyLoad:true,
         center:true,
+        dots: false,
         responsive:{
           0:{
             items:1,
-            nav:true
+            nav:false
           },
           600:{
               items:3,
@@ -56,6 +62,11 @@
           }
         }
       });
+
+
+      $('.nextBtn').click(function() {
+        owl.trigger('next.owl.carousel');
+      })
       
     </script>
   </body>

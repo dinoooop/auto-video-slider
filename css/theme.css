@@ -1,9 +1,16 @@
 body{
 	margin: 0;
+	/*background-color: #000;*/
 }
 .item {
 	width: 100%;
 	height: 350px;
 	background-color: #E74430;
 	overflow: hidden;
+}
+
+.nextBtn {
+	background-color: #E74430;
+	width: 100px;
+	height: 100px;
 }
