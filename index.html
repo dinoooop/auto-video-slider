@@ -26,13 +26,13 @@
 
       <div class="arrow next"></div>
       <div class="arrow prev"></div>
-      <div class="owl-carousel owl-theme">      
-        <div class="item"><iframe id="existing-iframe-example" width="100%" height="350" src="https://www.youtube.com/embed/6ZnfsJ6mM5c?rel=0&amp;showinfo=0&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-        <div class="item"><iframe width="100%" height="350" src="https://www.youtube.com/embed/whZNYPldMEY?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+      <!-- <div class="owl-carousel owl-theme">      
+        <div class="item"><iframe id="reactjs" width="100%" height="350" src="https://www.youtube.com/embed/6ZnfsJ6mM5c?rel=0&amp;showinfo=0&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+        <div class="item"><iframe id="reactjs2" width="100%" height="350" src="https://www.youtube.com/embed/whZNYPldMEY?rel=0&amp;showinfo=0&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="item"><iframe width="100%" height="350" src="https://www.youtube.com/embed/qs2n_poLarc?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="item"><iframe width="100%" height="350" src="https://www.youtube.com/embed/bKWDKmHvF78?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
         <div class="item"><iframe width="100%" height="350" src="https://www.youtube.com/embed/T5iGAAypGBA?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
-      </div>
+      </div> -->
   
     </div>
 
@@ -42,6 +42,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script>
+
+      var iframes = ['reactjs', 'reactjs2'];
 
       var owl = $('.owl-carousel');
        
@@ -83,16 +85,100 @@
 
       var player;
       function onYouTubeIframeAPIReady() {
-        player = new YT.Player('existing-iframe-example', {
-            events: {
-              'onReady': onPlayerReady
-            }
+        iframes.forEach(function(element) {
+          player = new YT.Player(element, {
+              events: {
+                'onReady': onPlayerReady
+              }
+          });
         });
+        
       }
+
+      
+      var playerHandles = [];
       
       function onPlayerReady(event) {
-        player.playVideo();
+        var id = event.target.a.id;
+        var obj = {};
+        obj[id] = event.target;
+        playerHandles.push(obj);
+        //console.log(playerHandles);
+        //player.playVideo();
+        // $(".next").click(function(){
+        //   player.playVideo();  
+        // });
+        // $(".prev").click(function(){
+        //   player.stopVideo();  
+        // });
+
+
       }
+
+      var navigate = {
+        carousel : ['A', 'B', 'C', 'D'],
+        current : 0,
+        updateIndex : function(event){
+
+          if(event == 'next'){
+            this.current++;
+          }else{
+            this.current--;
+          }
+          this.current = this.correction(this.current);
+          
+          this.prev = this.correction(this.current - 1);
+          this.next = this.correction(this.current + 1);
+
+          this.setObj();
+        },
+        correction: function(val){
+          if(val < 0){
+            val = this.carouselCount;
+          }
+
+          if(val > this.carouselCount){
+            val = 0;
+          }
+          return val;
+        },
+        init: function(){
+          this.carouselCount = this.carousel.length - 1;
+          this.prev = this.correction(this.current - 1);
+          this.next = this.correction(this.current + 1);
+          this.setObj();
+
+        },
+        setObj: function(){
+          this.prevObj = this.carousel[this.prev];
+          this.currentObj = this.carousel[this.current];
+          this.nextObj = this.carousel[this.next];
+        },
+        sampleConsole: function(){
+          console.log(this.prevObj + ' ' + this.currentObj + ' ' + this.nextObj);
+        }
+      };
+      
+      navigate.init();
+
+      console.log(navigate.carouselCount);
+      navigate.sampleConsole();
+      
+      navigate.updateIndex('prev');
+      navigate.sampleConsole();
+      
+      navigate.updateIndex('prev');
+      navigate.sampleConsole();
+
+      navigate.updateIndex('next');
+      navigate.sampleConsole();
+
+      navigate.updateIndex('prev');
+      navigate.sampleConsole();
+      
+      
+      
+
 
     </script>
   </body>
