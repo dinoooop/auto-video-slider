@@ -1,6 +1,6 @@
 body{
 	margin: 0;
-	/*background-color: #000;*/
+	background-color: #000;
 }
 .item {
 	width: 100%;
@@ -13,4 +13,38 @@ body{
 	background-color: #E74430;
 	width: 100px;
 	height: 100px;
+}
+.avl-carousel-container {
+	position: relative;
+}
+
+.arrow {
+	width:100px;
+	cursor:pointer;
+	font-size:18pt;
+	color:#fff;
+	pointer-events:all;
+	opacity:.9;
+	background-color:transparent;
+	background-image:url('../img/right.ea2388a2.svg');
+	background-clip:content-box;
+	background-position:50%;
+	background-repeat:no-repeat;
+	background-size:30%;
+	height:100px
+}
+
+.next {
+	position: absolute;
+	top: 115px;
+	right: 0px;
+	z-index:100000;
+}
+
+.prev{
+	transform: rotate(180deg);	
+	position: absolute;
+	top: 115px;
+	left: 0px;
+	z-index:100000;
 }
