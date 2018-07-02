@@ -41,6 +41,7 @@
     <script src="js/owl.carousel.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/navigate.js"></script>
     <script>
 
       var iframes = ['reactjs', 'reactjs2'];
@@ -115,71 +116,25 @@
 
       }
 
-      var navigate = {
-        carousel : ['A', 'B', 'C', 'D'],
-        current : 0,
-        updateIndex : function(event){
-
-          if(event == 'next'){
-            this.current++;
-          }else{
-            this.current--;
-          }
-          this.current = this.correction(this.current);
-          
-          this.prev = this.correction(this.current - 1);
-          this.next = this.correction(this.current + 1);
-
-          this.setObj();
-        },
-        correction: function(val){
-          if(val < 0){
-            val = this.carouselCount;
-          }
-
-          if(val > this.carouselCount){
-            val = 0;
-          }
-          return val;
-        },
-        init: function(){
-          this.carouselCount = this.carousel.length - 1;
-          this.prev = this.correction(this.current - 1);
-          this.next = this.correction(this.current + 1);
-          this.setObj();
-
-        },
-        setObj: function(){
-          this.prevObj = this.carousel[this.prev];
-          this.currentObj = this.carousel[this.current];
-          this.nextObj = this.carousel[this.next];
-        },
-        sampleConsole: function(){
-          console.log(this.prevObj + ' ' + this.currentObj + ' ' + this.nextObj);
-        }
-      };
+      
       
       navigate.init();
 
       console.log(navigate.carouselCount);
-      navigate.sampleConsole();
+      console.log(navigate.currentObj);
+      
+      navigate.updateIndex('next');
+      console.log(navigate.currentObj);
       
       navigate.updateIndex('prev');
-      navigate.sampleConsole();
-      
+      console.log(navigate.currentObj);
+
       navigate.updateIndex('prev');
-      navigate.sampleConsole();
+      console.log(navigate.currentObj);
 
       navigate.updateIndex('next');
-      navigate.sampleConsole();
-
-      navigate.updateIndex('prev');
-      navigate.sampleConsole();
+      console.log(navigate.currentObj);
       
-      
-      
-
-
     </script>
   </body>
 </html>
