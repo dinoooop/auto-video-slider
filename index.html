@@ -46,6 +46,12 @@
     <script src="js/navigate.js"></script>
     <script>
 
+      var iframes = [];
+      $(".owl-carousel .item").each(function(index){
+        var element = $(this).find('iframe').attr('id');
+        iframes.push(element);
+      });
+
       var owl = $('.owl-carousel');
       owl.owlCarousel({
         items:1,
@@ -66,13 +72,6 @@
             nav:false
           }
         }
-      });
-
-
-      var iframes = [];
-      $(".owl-carousel .item").each(function(index){
-        var element = $(this).find('iframe').attr('id');
-        iframes.push(element);
       });
 
 
